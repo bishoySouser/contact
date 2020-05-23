@@ -5,10 +5,16 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">
-                    Contect us
-                </div>
+                <div class="card-header">Setting Contact Form</div>
+
                 <div class="card-body">
+                    @if (Session::has('info'))
+                        <div class="col-md-12">
+                        <div class="alert alert-info" role="alert">
+                            {{ Session::get('info') }}
+                        </div>
+                        </div>
+                    @endif
                     @if (count( $errors->all() ) )
                     <div class="row">
                         <div class="col-md-12">
@@ -22,31 +28,24 @@
                         </div>
                     </div>
                     @endif
-                    <form action="{{ url('/contact') }}" method="post">
+                    <form action="{{ url('/setting', ["id" => $setting->id]) }}" method="Post">
                         {{ csrf_field() }}
+                        {{ method_field('PATCH') }}
+                        <input type="hidden" name="id" value="{{ $setting->id }}">
                         <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control">
+                            <label>Header Message</label>
+                        <input type="text" name="header" value="{{$setting->header}}" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" name="email" class="form-control">
+                            <label>Footer Message</label>
+                            <input type="text" name="footer" value="{{$setting->footer}}" class="form-control">
                         </div>
-                        <div class="form-group">
-                            <label>phone</label>
-                            <input type="text" name="phone" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>Message</label>
-                            <textarea name="message" class="form-control"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send</button>
+                        <button type="submit" class="btn btn-primary">update</button>
                     </form>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
-    
-
 @endsection

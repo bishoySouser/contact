@@ -1,6 +1,9 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +20,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/contect', function() {
-    return view('pages.contect');
-});
+
+Route::resource('contact', "Contact\Email");
+Route::resource('setting', "SettingController")->middleware('auth');
+
+
+Auth::routes(['register' => false]);
+
+Route::get('/home', 'HomeController@index')->name('home');
