@@ -21,7 +21,9 @@ Route::get('/', function () {
 });
 
 
-Route::resource('contact', "Contact\Email");
+Route::resource('contact', "Contact\Email" , [
+    'only' => ['index', 'create', 'store']
+]);
 Route::resource('setting', "SettingController")->middleware('auth');
 
 
