@@ -24,7 +24,9 @@ Route::get('/', function () {
 Route::resource('contact', "Contact\Email" , [
     'only' => ['index', 'create', 'store']
 ]);
-Route::resource('setting', "SettingController")->middleware('auth');
+Route::resource('setting', "SettingController", [
+    'only' => ['index', 'update']
+])->middleware('auth');
 
 
 Auth::routes(['register' => false]);
