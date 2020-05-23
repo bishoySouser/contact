@@ -14,7 +14,7 @@ class Email extends Controller
 {
     public function __construct() {
         $this->middleware('auth', ['except' => [
-            'create'
+            'create', 'store'
         ]]);
     }
     /**
